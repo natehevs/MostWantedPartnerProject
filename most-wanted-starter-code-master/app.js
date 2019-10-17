@@ -80,10 +80,10 @@ function searchByName(people){
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
-      return displayPeople();
+      return true;
     }
     else{
-      return prompt("Could not find that person.");
+      return false;
     }
   })
   // TODO: find the person using the name they entered
