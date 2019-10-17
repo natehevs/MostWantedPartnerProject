@@ -39,7 +39,7 @@ function app(people){
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  mainMenu(searchResults[0], people);
 }
 
 //Menu function to call once you find who you are looking for
@@ -74,9 +74,9 @@ function mainMenu(person, people){
   }
 }
 
-function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars;
-  let lastName = promptFor("What is the person's last name?", chars;
+function searchByName(people, person){
+  let firstName = promptFor("What is the person's first name?", chars);
+  let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -85,13 +85,13 @@ function searchByName(people){
     else{
       return false;
     }
-  })
+  });
   // TODO: find the person using the name they entered
   return foundPerson;
 }
 
 // alerts a list of people
-function displayPeople(people){
+function displayPeople(people, person){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
