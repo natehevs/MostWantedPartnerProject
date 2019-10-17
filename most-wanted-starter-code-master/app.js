@@ -31,7 +31,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -90,6 +90,35 @@ function searchByName(people, person){
   return foundPerson;
 }
 
+function searchByTraits(people, person){
+  // let gender = promptFor("What is the person's gender? Type 'male' 'female' 'unknown'", chars);
+  // let weight = promptFor("What is the person's weight? If you don't know type 'unknown'", chars);
+  // let height = promptFor("What is the person's height? If you don't know type 'unknown'", chars);
+  // let eyeColor = promptFor("What is the person's eye color? If you don't know type 'unknown'", chars);
+  // let occupation = promptFor("What is the person's occupation? If you don't know type 'unknown'", chars);
+  let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation'", chars);
+
+  switch(traitResponse){
+    case "gender":
+      traitResponse = genderFunction(people);
+    break;
+    case: "weight":
+      traitResponse = weightFunction(people);
+    break;
+    case "height":
+      traitResponse = heightFunction(people);
+    break;
+    case "eyeColor":
+      traitResponse = eyeColorFunction(people);
+    break;
+    case: "occupation":
+      traitResponse = occupationFunction(people);
+    break;
+    case: "quit":
+    return; //stop execution
+  }
+
+}
 // alerts a list of people
 function displayPeople(people, person){
   alert(people.map(function(person){
@@ -116,10 +145,10 @@ function displayPerson(person){
 
 // function that prompts and validates user input
 function promptFor(question, valid){
+  let response;
   do{
-    let response = prompt(question).trim();
-      return response;
-  } while(!response || !valid(response));
+    response = prompt(question).trim();
+    } while(!response || !valid(response));
 }
 
 // helper function to pass into promptFor to validate yes/no answers
@@ -130,5 +159,65 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+function genderFunction(){
+  let genderOfPerson = promptFor("What is the person's gender? Type in 'male' or 'female'", chars);
+
+  let foundGender = people.filter(function(person){
+    if(person.genderOfPerson === genderOfPerson){
+      return foundGender;
+    } else {
+      alert("Could not find the gender you are looking for.");
+    }
+  }
+}
+
+function weightFunction(){
+  let weightOfPerson = promptFor("What is the person's weight?", chars);
+
+  let foundWeight = people.filter(function(person){
+    if(person.weight === weightOfPerson){
+      return foundWeight;
+    } else {
+      alert("Could not find the weight you are looking for.");
+    }
+  }
+}
+
+function heightFunction(){
+  let heightOfPerson = promptFor("What is the person's height?", chars);
+
+  let foundHeight = people.filter(function(person){
+    if(person.height === heightOfPerson){
+      return foundWeight;
+    } else {
+      alert("Could not find the height you are looking for.");
+    }
+  }
+}
+
+function eyeColorFunction(){
+  let eyeColorOfPerson = promptFor("What is the person's eye color?", chars);
+
+  let foundEyeColor = people.filter(function(person){
+    if(person.eyeColor === eyeColorOfPerson){
+      return foundEyeColor;
+    } else {
+      alert("Could not find the eye color of the person you are looking for.");
+    }
+  }
+}
+
+function occupationFunction(){
+  let occupationOfPerson = promptFor("What is the person's occupation?", chars);
+
+  let foundOccupation = people.filter(function(person){
+    if(person.occupation === occupationOfPerson){
+      return foundOccupation;
+    } else {
+      alert("Could not find the occupation of the person you are looking for.")
+    }
+  }
 }
 
