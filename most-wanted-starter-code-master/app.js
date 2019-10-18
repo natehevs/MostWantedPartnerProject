@@ -52,10 +52,10 @@ function mainMenu(person, people){
       person = displayPerson(person);
     break;
     case "family":   
-      person = displayFamily(person); //parents, spouse, siblings
+      person = displayFamily(person, people); //parents, spouse, siblings
     break;
     case "descendants":   
-      person = displayDescendants(person); //kids, grandkids
+      person = displayDescendants(person, people); //kids, grandkids
     break;
     case "restart":
     app(people); // restart
@@ -224,21 +224,41 @@ function occupationFunction(people, person){
 }
 
 function displayFamily(person, people){
-  findSpouse(person);
+  findSpouse(person, people);
+  findParents(person, people);
+  findSiblings(person, people);
 }
 
-function findSpouse(person){
-  if(person.currentSpouse !== null){
-    return person.currentSpouse;
+function findSpouse(person, people){
+  let spouse = people.filter(function(el){
+    if(person.currentSpouse == el.id){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return spouse;
+}
+
+function findParents(person, people){
+    if(person.parents.length == 0){
+      return false;
+    } else {
+      return person.parents;
+    }
+}
+
+function findSiblings(person, people){
+  let foundSiblings = people.filter(function(el){
+  if (el.parents[0] === person.parents[0]){
+    return true;
   }
-}
-
-function findParents(){
-
-}
-
-function findSiblings(){
-
+  else {
+    return false;
+  }
+  });
+return foundSiblings;
 }
 
 function displayDescendants(person, people){
