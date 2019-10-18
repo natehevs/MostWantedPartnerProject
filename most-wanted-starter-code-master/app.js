@@ -224,9 +224,15 @@ function occupationFunction(people, person){
 }
 
 function displayFamily(person, people){
+  let familyInfo = alert("Spouse Name:" + findSpouse(person, people)[0].firstName + " " + findSpouse(person, people)[0].lastName + "\n");
+      familyInfo = alert("Parents Name(s):" + findParents(person, people)[0].firstName + " " + findParents(person, people)[0].lastName + " " + findParents(person, people)[1].firstName + " " + findParents(person, people)[1].lastName + "\n");
+      familyInfo = alert("Siblings Name(s):" + findSiblings(person, people)[0].firstName + " " + findSiblings(person, people)[0].lastName + " " + findSiblings(person, people)[1].firstName + " " + findSiblings(person, people)[1].lastName + "\n");
+  
   findSpouse(person, people);
   findParents(person, people);
   findSiblings(person, people);
+
+
 }
 
 function findSpouse(person, people){
@@ -237,16 +243,20 @@ function findSpouse(person, people){
     else{
       return false;
     }
-  })
+  });
   return spouse;
 }
 
 function findParents(person, people){
+  let personParents = people.filter(function(el){
     if(person.parents.length == 0){
       return false;
-    } else {
-      return person.parents;
+    } 
+    else {
+      return true;
     }
+  });
+  return personParents;
 }
 
 function findSiblings(person, people){
