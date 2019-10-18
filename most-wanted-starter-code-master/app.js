@@ -96,13 +96,18 @@ function searchByTraits(people, person){
   // let height = promptFor("What is the person's height? If you don't know type 'unknown'", chars);
   // let eyeColor = promptFor("What is the person's eye color? If you don't know type 'unknown'", chars);
   // let occupation = promptFor("What is the person's occupation? If you don't know type 'unknown'", chars);
+
+
+  // alert("Here is everyone with the gender you are looking for.");
+  // displayPeople(foundGender);
+
   let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation'", chars);
 
   switch(traitResponse){
     case "gender":
       traitResponse = genderFunction(people);
     break;
-    case: "weight":
+    case "weight":
       traitResponse = weightFunction(people);
     break;
     case "height":
@@ -111,16 +116,16 @@ function searchByTraits(people, person){
     case "eyeColor":
       traitResponse = eyeColorFunction(people);
     break;
-    case: "occupation":
+    case "occupation":
       traitResponse = occupationFunction(people);
     break;
-    case: "quit":
+    case "quit":
     return; //stop execution
   }
 
 }
 // alerts a list of people
-function displayPeople(people, person){
+function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
@@ -149,6 +154,7 @@ function promptFor(question, valid){
   do{
     response = prompt(question).trim();
     } while(!response || !valid(response));
+    return response;
 }
 
 // helper function to pass into promptFor to validate yes/no answers
@@ -161,63 +167,69 @@ function chars(input){
   return true; // default validation only
 }
 
-function genderFunction(){
+function genderFunction(people, person){
   let genderOfPerson = promptFor("What is the person's gender? Type in 'male' or 'female'", chars);
 
   let foundGender = people.filter(function(person){
-    if(person.genderOfPerson === genderOfPerson){
-      return foundGender;
+    if(person.gender === genderOfPerson){
+      return true;
     } else {
-      alert("Could not find the gender you are looking for.");
+      return false;
     }
-  }
+  });
+
+  return foundGender;
 }
 
-function weightFunction(){
+function weightFunction(people, person){
   let weightOfPerson = promptFor("What is the person's weight?", chars);
 
   let foundWeight = people.filter(function(person){
     if(person.weight === weightOfPerson){
-      return foundWeight;
+      return true;
     } else {
-      alert("Could not find the weight you are looking for.");
+      return false;
     }
-  }
+  });
+  return foundWeight;
 }
 
-function heightFunction(){
+function heightFunction(people, person){
   let heightOfPerson = promptFor("What is the person's height?", chars);
 
   let foundHeight = people.filter(function(person){
     if(person.height === heightOfPerson){
-      return foundWeight;
+      return true;
     } else {
-      alert("Could not find the height you are looking for.");
+      return false;
     }
-  }
+  });
+  return foundHeight;
 }
 
-function eyeColorFunction(){
+function eyeColorFunction(people, person){
   let eyeColorOfPerson = promptFor("What is the person's eye color?", chars);
 
   let foundEyeColor = people.filter(function(person){
     if(person.eyeColor === eyeColorOfPerson){
-      return foundEyeColor;
+      return true;
     } else {
-      alert("Could not find the eye color of the person you are looking for.");
+      return false;
     }
-  }
+  });
+  return foundEyeColor;
 }
 
-function occupationFunction(){
+function occupationFunction(people, person){
   let occupationOfPerson = promptFor("What is the person's occupation?", chars);
 
   let foundOccupation = people.filter(function(person){
     if(person.occupation === occupationOfPerson){
-      return foundOccupation;
+      return true;
     } else {
-      alert("Could not find the occupation of the person you are looking for.")
+      return false;
     }
-  }
+  });
+  return foundOccupation;
 }
 
