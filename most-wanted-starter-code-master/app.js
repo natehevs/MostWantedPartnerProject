@@ -91,41 +91,34 @@ function searchByName(people, person){
 }
 
 function searchByTraits(people, person){
-  // let gender = promptFor("What is the person's gender? Type 'male' 'female' 'unknown'", chars);
-  // let weight = promptFor("What is the person's weight? If you don't know type 'unknown'", chars);
-  // let height = promptFor("What is the person's height? If you don't know type 'unknown'", chars);
-  // let eyeColor = promptFor("What is the person's eye color? If you don't know type 'unknown'", chars);
-  // let occupation = promptFor("What is the person's occupation? If you don't know type 'unknown'", chars);
-
-
-  // alert("Here is everyone with the gender you are looking for.");
-  // displayPeople(foundGender);
-  let filterResult = people;
-  let searchingByTraits = true;
+let filterResult = people;
+let searchingByTraits = true;
   while(searchingByTraits === true){
-  let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation' 'quit'", chars);
+    let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation' 'results'", chars);
 
-  switch(traitResponse){
-    case "gender":
-      filterResult = genderFunction(filterResult);
-    break;
-    case "weight":
-      filterResult = weightFunction(filterResult);
-    break;
-    case "height":
-      filterResult = heightFunction(filterResult);
-    break;
-    case "eyeColor":
-      filterResult = eyeColorFunction(filterResult);
-    break;
-    case "occupation":
-      filterResult = occupationFunction(filterResult);
-    break;
-    case "quit":
-      searchingByTraits = false;
-    return; //stop execution
+    switch(traitResponse){
+      case "gender":
+        filterResult = genderFunction(filterResult);
+      break;
+      case "weight":
+        filterResult = weightFunction(filterResult);
+      break;
+      case "height":
+        filterResult = heightFunction(filterResult);
+      break;
+      case "eye color":
+        filterResult = eyeColorFunction(filterResult);
+      break;
+      case "occupation":
+        filterResult = occupationFunction(filterResult);
+      break;
+      case "results":
+        searchingByTraits = false;
+      break;
+    }
   }
-}
+  alert("Here is everyone with the traits you are looking for.");
+  displayPeople(filterResult);
 }
 // alerts a list of people
 function displayPeople(people){
@@ -188,7 +181,7 @@ function weightFunction(people, person){
   let weightOfPerson = promptFor("What is the person's weight?", chars);
 
   let foundWeight = people.filter(function(person){
-    if(person.weight === weightOfPerson){
+    if(person.weight == weightOfPerson){
       return true;
     } else {
       return false;
@@ -201,7 +194,7 @@ function heightFunction(people, person){
   let heightOfPerson = promptFor("What is the person's height?", chars);
 
   let foundHeight = people.filter(function(person){
-    if(person.height === heightOfPerson){
+    if(person.height == heightOfPerson){
       return true;
     } else {
       return false;
