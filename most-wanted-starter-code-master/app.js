@@ -6,14 +6,7 @@ Build all of your functions for displaying and gathering information below (GUI)
     // eye color, height, weight
 
 //Create a working app to search a database to find people.
-  //Create search by name function
-    //find person using name they entered
-  //search by trait function Prompt("Would you like to search for any traits like 'gender', 'weight', 'height', 'eye color', or 'occupation'. Type in which one you would like to search for.")
-    //gender
-    //weight
-    //height
-    //eye color
-    //occupation
+
 
   //display options/main menu function
     //prompt for option to display info
@@ -33,7 +26,7 @@ function app(people){
     case 'no':
       searchResults = searchByTraits(people);
       break;
-      default:
+    default:
     app(people); // restart app
       break;
   }
@@ -56,13 +49,13 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      person = displayPerson(person);
     break;
-    case "family":
-    // TODO: get person's family
+    case "family":   
+     person = displayFamily(person); //parents, spouse, siblings
     break;
-    case "descendants":
-    // TODO: get person's descendants
+    case "descendants":   
+      person = displayDescendants(person); //kids, grandkids
     break;
     case "restart":
     app(people); // restart
@@ -119,6 +112,7 @@ let searchingByTraits = true;
   }
   alert("Here is everyone with the traits you are looking for.");
   displayPeople(filterResult);
+  return filterResult;
 }
 // alerts a list of people
 function displayPeople(people){
