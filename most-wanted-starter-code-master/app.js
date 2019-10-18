@@ -52,7 +52,7 @@ function mainMenu(person, people){
       person = displayPerson(person);
     break;
     case "family":   
-     person = displayFamily(person); //parents, spouse, siblings
+      person = displayFamily(person); //parents, spouse, siblings
     break;
     case "descendants":   
       person = displayDescendants(person); //kids, grandkids
@@ -223,3 +223,24 @@ function occupationFunction(people, person){
   return foundOccupation;
 }
 
+function displayFamily(person, people){
+  findSpouse(person);
+}
+
+function findSpouse(person){
+  if(person.currentSpouse !== null){
+    return person.currentSpouse;
+  }
+}
+
+function findParents(){
+
+}
+
+function findSiblings(){
+
+}
+
+function displayDescendants(person, people){
+
+}
