@@ -100,29 +100,32 @@ function searchByTraits(people, person){
 
   // alert("Here is everyone with the gender you are looking for.");
   // displayPeople(foundGender);
-
-  let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation'", chars);
+  let filterResult = people;
+  let searchingByTraits = true;
+  while(searchingByTraits === true){
+  let traitResponse = promptFor("Which trait would you like to search for? 'gender' 'weight' 'height' 'eye color' 'occupation' 'quit'", chars);
 
   switch(traitResponse){
     case "gender":
-      traitResponse = genderFunction(people);
+      filterResult = genderFunction(filterResult);
     break;
     case "weight":
-      traitResponse = weightFunction(people);
+      filterResult = weightFunction(filterResult);
     break;
     case "height":
-      traitResponse = heightFunction(people);
+      filterResult = heightFunction(filterResult);
     break;
     case "eyeColor":
-      traitResponse = eyeColorFunction(people);
+      filterResult = eyeColorFunction(filterResult);
     break;
     case "occupation":
-      traitResponse = occupationFunction(people);
+      filterResult = occupationFunction(filterResult);
     break;
     case "quit":
+      searchingByTraits = false;
     return; //stop execution
   }
-
+}
 }
 // alerts a list of people
 function displayPeople(people){
