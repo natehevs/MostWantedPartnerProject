@@ -1,21 +1,5 @@
 "use strict"
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
 
-    // eye color, height, weight
-
-//Create a working app to search a database to find people.
-
-
-  //display options/main menu function
-    //prompt for option to display info
-    // prompt to see family/descendants
-
-
-
-
-// app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
@@ -27,22 +11,18 @@ function app(people){
       searchResults = searchByTraits(people);
       break;
     default:
-    app(people); // restart app
+    app(people);
       break;
   }
-  
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+
   mainMenu(searchResults[0], people);
 }
 
-//Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(people); 
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
@@ -52,18 +32,18 @@ function mainMenu(person, people){
       person = displayPerson(person);
     break;
     case "family":   
-      person = displayFamily(person, people); //parents, spouse, siblings
+      person = displayFamily(person, people); 
     break;
     case "descendants":   
-      person = findDescendants(person, people); //kids, grandkids
+      person = displayDescendants(person, people); 
     break;
     case "restart":
-    app(people); // restart
+    app(people); 
     break;
     case "quit":
-    return; // stop execution
+    return; 
     default:
-    return mainMenu(person, people); // ask again
+    return mainMenu(person, people); 
   }
 }
 
@@ -79,7 +59,7 @@ function searchByName(people, person){
       return false;
     }
   });
-  // TODO: find the person using the name they entered
+  
   return foundPerson;
 }
 
@@ -114,7 +94,7 @@ let searchingByTraits = true;
   displayPeople(filterResult);
   return filterResult;
 }
-// alerts a list of people
+
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -122,8 +102,7 @@ function displayPeople(people){
 }
 
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
+
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
@@ -136,9 +115,9 @@ function displayPerson(person){
   personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   
   alert(personInfo);
+  return mainMenu(person);
 }
 
-// function that prompts and validates user input
 function promptFor(question, valid){
   let response;
   do{
@@ -147,14 +126,12 @@ function promptFor(question, valid){
     return response;
 }
 
-// helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-// helper function to pass in as default promptFor validation
 function chars(input){
-  return true; // default validation only
+  return true; 
 }
 
 function genderFunction(people, person){
@@ -233,7 +210,7 @@ function displayFamily(person, people){
   let siblingNames = "Siblings Name(s): ";
 
   for(let i = 0; allSpouse.length > i; i++) {
-    spouseName += allSpouse[i].firstName + " " + allSiblings[i].lastName + ", ";
+    spouseName += allSpouse[i].firstName + " " + allSpouse[i].lastName + ", ";
   }
 
   alert(spouseName);
@@ -277,7 +254,9 @@ function findParents(person, people){
 
 function findSiblings(person, people){
   let foundSiblings = people.filter(function(el){
-    if(el.parents[0] === person.parents[0]){
+    if(person.parents.length === 0){
+      return false;
+    } else if(el.parents[0] === person.parents[0] || el.parents[0] === person.parents[1] || el.parents[1] === person.parents[1] || el.parents[1] === person.parents[0]){
       return true;
     } else {
       return false;
@@ -285,17 +264,6 @@ function findSiblings(person, people){
   });
   return foundSiblings;
 }
-
-// function displayDescendants(person, people){
-//   let foundDescendents = people.filter(function(el){
-//     if(el.parents[0] === person.id || el.parents[1] === person.id){
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-//   return foundDescendents();
-// }
 
 function findDescendants(person, people){
   let grandkids;
@@ -311,5 +279,17 @@ function findDescendants(person, people){
 
   }
   return foundDescendants;
+  }
+
+  function displayDescendants(person, people){
+    let allDescendants = findDescendants(person, people);
+    let descendantsName = "Descendants Name: ";
+
+    for(let i = 0; allDescendants.length > i; i++) {
+    descendantsName += allDescendants[i].firstName + " " + allDescendants[i].lastName + ", ";
+    }
+
+    alert(descendantsName);
+    return mainMenu(person);
   }
  
