@@ -298,16 +298,18 @@ function findSiblings(person, people){
 // }
 
 function findDescendants(person, people){
-  let foundDescendents = people.filter(function(el){
+  let grandkids;
+  let foundDescendants = people.filter(function(el){
     if(el.parents[0] === person.id || el.parents[1] === person.id){
       return true;
       } else {
         return false;
       }
       });
-  for(let i = 0; i < foundDescendents.length; i++){
-    return findDescendants(foundDescendents[i], people);
+  for(let i = 0; i < foundDescendants.length; i++){
+    foundDescendants = foundDescendants.concat(findDescendants(foundDescendants[i], people));
+
   }
-  return foundDescendents;
+  return foundDescendants;
   }
  
