@@ -227,10 +227,11 @@ function displayFamily(person, people){
   let familyInfo = alert("Spouse Name:" + findSpouse(person, people)[0].firstName + " " + findSpouse(person, people)[0].lastName + "\n");
       familyInfo = alert("Parents Name(s):" + findParents(person, people)[0].firstName + " " + findParents(person, people)[0].lastName + " " + findParents(person, people)[1].firstName + " " + findParents(person, people)[1].lastName + "\n");
       familyInfo = alert("Siblings Name(s):" + findSiblings(person, people)[0].firstName + " " + findSiblings(person, people)[0].lastName + " " + findSiblings(person, people)[1].firstName + " " + findSiblings(person, people)[1].lastName + "\n");
-  
+      
   findSpouse(person, people);
   findParents(person, people);
   findSiblings(person, people);
+
 
 
 }
@@ -249,11 +250,11 @@ function findSpouse(person, people){
 
 function findParents(person, people){
   let personParents = people.filter(function(el){
-    if(person.parents.length == 0){
-      return false;
+    if(el.parents[0] === person.parents[0] || el.parents[1] === person.parents[1]){
+      return true;
     } 
     else {
-      return true;
+      return false;
     }
   });
   return personParents;
@@ -261,16 +262,22 @@ function findParents(person, people){
 
 function findSiblings(person, people){
   let foundSiblings = people.filter(function(el){
-  if (el.parents[0] === person.parents[0]){
-    return true;
-  }
-  else {
-    return false;
-  }
+    if(el.parents[0] === person.parents[0]){
+      return true;
+    } else {
+      return false;
+    }
   });
-return foundSiblings;
+  return foundSiblings;
 }
 
 function displayDescendants(person, people){
-
+  let foundDescendents = people.filter(function(el){
+    if(el.parents[0] === person.id || el.parents[1] === person.id){
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return foundDescendents;
 }
