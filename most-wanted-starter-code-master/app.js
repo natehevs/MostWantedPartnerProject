@@ -224,15 +224,30 @@ function occupationFunction(people, person){
 }
 
 function displayFamily(person, people){
-  let familyInfo = alert("Spouse Name:" + findSpouse(person, people)[0].firstName + " " + findSpouse(person, people)[0].lastName + "\n");
-      familyInfo = alert("Parents Name(s):" + findParents(person, people)[0].firstName + " " + findParents(person, people)[0].lastName + " " + findParents(person, people)[1].firstName + " " + findParents(person, people)[1].lastName + "\n");
-      familyInfo = alert("Siblings Name(s):" + findSiblings(person, people)[0].firstName + " " + findSiblings(person, people)[0].lastName + " " + findSiblings(person, people)[1].firstName + " " + findSiblings(person, people)[1].lastName + "\n");
-  
-  findSpouse(person, people);
-  findParents(person, people);
-  findSiblings(person, people);
+  let allSpouse = findSpouse(person, people);
+  let spouseName = "Spouse Name: ";
+  let allParents = findParents(person, people);
+  let parentsNames = "Parents Names: ";
+  let allSiblings = findSiblings(person, people);
+  let siblingNames = "Siblings Name(s): ";
 
+  for(let i = 0; allSpouse.length > i; i++) {
+    spouseName += allSpouse[i].firstName + " " + allSiblings[i].lastName + ", ";
+  }
 
+  alert(spouseName);
+
+  for(let i = 0; allParents.length > i; i++) {
+    parentsNames += allParents[i].firstName + " " + allParents[i].lastName + ", ";
+  }
+
+  alert(parentsNames);
+
+  for(let i = 0; allSiblings.length > i; i++) {
+    siblingNames += allSiblings[i].firstName + " " + allSiblings[i].lastName + ", ";
+  }
+
+  alert(siblingNames);
 }
 
 function findSpouse(person, people){
