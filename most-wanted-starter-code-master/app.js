@@ -55,7 +55,7 @@ function mainMenu(person, people){
       person = displayFamily(person, people); //parents, spouse, siblings
     break;
     case "descendants":   
-      person = displayDescendants(person, people); //kids, grandkids
+      person = findDescendants(person, people); //kids, grandkids
     break;
     case "restart":
     app(people); // restart
@@ -265,7 +265,7 @@ function findSpouse(person, people){
 
 function findParents(person, people){
   let personParents = people.filter(function(el){
-    if(el.parents[0] === person.parents[0] || el.parents[1] === person.parents[1]){
+    if(el.id === person.parents[0] || el.id === person.parents[1]){
       return true;
     } 
     else {
@@ -286,13 +286,28 @@ function findSiblings(person, people){
   return foundSiblings;
 }
 
-function displayDescendants(person, people){
+// function displayDescendants(person, people){
+//   let foundDescendents = people.filter(function(el){
+//     if(el.parents[0] === person.id || el.parents[1] === person.id){
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   });
+//   return foundDescendents();
+// }
+
+function findDescendants(person, people){
   let foundDescendents = people.filter(function(el){
     if(el.parents[0] === person.id || el.parents[1] === person.id){
       return true;
-    } else {
-      return false;
-    }
-  });
+      } else {
+        return false;
+      }
+      });
+  for(let i = 0; i < foundDescendents.length; i++){
+    return findDescendants(foundDescendents[i], people);
+  }
   return foundDescendents;
-}
+  }
+ 
