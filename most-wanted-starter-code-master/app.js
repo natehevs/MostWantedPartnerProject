@@ -91,7 +91,9 @@ let searchingByTraits = true;
     }
   }
   alert("Here is everyone with the traits you are looking for.");
+  if (filterResult.length >= 1) {
   displayPeople(filterResult);
+  }
   return filterResult;
 }
 
@@ -269,7 +271,6 @@ function findSiblings(person, people){
 }
 
 function findDescendants(person, people){
-  let grandkids;
   let foundDescendants = people.filter(function(el){
     if(el.parents[0] === person.id || el.parents[1] === person.id){
       return true;
